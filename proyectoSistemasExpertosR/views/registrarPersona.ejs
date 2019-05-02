@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+	  <meta charset="utf-8" />
+	  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	  <title>Page Title</title>
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <link rel="stylesheet" type="text/css" media="screen" href="/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="/css/custom.css" />
+		<link href="/css/landing.min.css" rel="stylesheet">
+</head>
+<body>
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-dark  navbar-shrink" id="mainNav">
+		<div class="container">
+		  <a class="navbar-brand js-scroll-trigger" href="/"><img src="/img/logosmall.png" alt=""></a>
+		  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+			Menu
+			<i class="fas fa-bars"></i>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarResponsive">
+			<ul class="navbar-nav text-uppercase ml-auto">
+			  <!-- <li class="nav-item">
+				<a class="nav-link js-scroll-trigger" href="#services">Servicios</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link js-scroll-trigger" href="#about">Plan premium</a>
+			  </li> -->
+			  <li class="nav-item">
+				<a class="nav-link js-scroll-trigger" href="/login">Entrar</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link js-scroll-trigger" href="/registrarse">Registrarse</a>
+			  </li>
+			</ul>
+		  </div>
+		</div>
+	  </nav>
+	
+<div class="container">
+	
+		<!-- <% if (typeof errores !== 'undefined') {%>
+			<%for(var i=0; i < errores.length; i++) {%>
+				<div class="alert alert-warning alert-dismissible fade show" role="alert">
+					<%=errores[i].texto%>
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+			<%}%>
+		<%}%>
+			 -->
+
+		
+		<% include partials/errors%>
+		<% include partials/mensajes%>
+
+		<div class="row">
+			<div class="col-md-4 mx-auto d-block bg-light mb-5" style="border:1px solid #b69b68; margin-top:160px; padding-bottom:20px; ">
+	        <form action="/usuarios/nuevoUsuario" method="POST">
+					  <div class="form-row">
+					    <div class="form-group col-md-6" style="margin-top: 25px;">
+					      <label class="sr-only" for="inputEmail4">Nombre</label>
+					      <input type="text" class="form-control" name="nombre" id="inputEmail4" placeholder="Nombre"> 
+					    </div>
+					    <div class="form-group col-md-6" style="margin-top: 25px;">
+					      <label class="sr-only" for="inputPassword4">Apellido</label>
+					      <input type="text" class="form-control" name="apellido" id="inputPassword4" placeholder="Apellido">
+					    </div>
+					  </div>
+					  <div class="form-group"  style="margin-top: 10px;">
+					    <label class="sr-only" for="inputAddress">correo</label>
+					    <input type="text" class="form-control" name="correo" id="inputAddress" placeholder="Correo">
+					  </div>
+					  <div class="form-group" style="margin-top: 25px;">
+					    <label class="sr-only" for="inputAddress">contraseña</label>
+					    <input type="password" class="form-control" name="password" id="inputAddress" placeholder="contraseña">
+					  </div>
+					  <div class="form-group"  style="margin-top: 25px;">
+					    <label class="sr-only" for="inputAddress">contraseña</label>
+					    <input type="password" class="form-control" name="confirmar_password" id="inputAddress" placeholder="Confirmar contraseña">
+					  </div>
+					  <button type="submit" class="btn btn-primary">Registrar</button>
+         </form>
+			</div>
+		</div>			
+</div>
+
+
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,30 @@
+<!-- <% if (typeof success_msg !== 'undefined') {%>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <%=success_msg%>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<%}%> -->
+
+
+<% if (error.length > 0) {%>
+  <div class="alert alert-warning alert-dismissible fade show mt-5" role="alert">
+    <%=error%>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<%}%>
+
+
+<% if (typeof errores !== 'undefined') {%>
+    <%for(var i=0; i < errores.length; i++) {%>
+        <div class="alert alert-warning alert-dismissible fade show mt-4" role="alert">
+            <%=errores[i].texto%>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <%}%>
+<%}%>

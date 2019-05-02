@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="ES">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/principal.css">
+		<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"> -->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+    <title>bootstrap 4 sidebar</title>
+  </head>
+  <body>
+   
+   <div class="wrapper">
+   	<nav id="sidebar">
+   		<div class="sidebar-header">
+				 <a class="navbar-brand js-scroll-trigger" href="/"><img src="/img/logosmall.png" alt=""></a>
+   			<a class="mx-auto" href="/proyectos">CODESPLIT</a>
+   		</div>
+   		
+   		
+   		<ul class="list-unstyled components">
+   			<p><%=user.nombre%> <%=user.apellido%></p>
+   			<li class="active">
+   				<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+   				<ul class="collapse list-unstyled" id="homeSubmenu">
+   					<li>
+   						<a href="#">home1</a>
+   					</li>
+   					<li>
+   						<a href="#">home2</a>
+   					</li>
+   					<li>
+   						<a href="#">home3</a>
+   					</li>
+   				</ul> 
+				 </li>
+
+				<% if (typeof ruta !== 'undefined') {%>
+					<% if (ruta == 1) {%>
+					
+				<li>
+					<a href="#"  data-toggle="modal" data-target="#modal-nuevo-proyecto"><i class="fas fa-plus-square pr-2"></i>Nuevo proyecto</a>
+				</li> 
+				 <% } %> <% } %> 
+				 <% if (typeof ruta !== 'undefined') {%>
+					<% if ( ruta !== 1) {%>
+   			<li>
+   				<a href="#"  data-toggle="modal" data-target="#modal-nueva-carpeta"><i class="fas fa-folder-plus pr-2"></i>Nueva carpeta</a>
+			</li>
+
+			<li>
+				<a href="#"  data-toggle="modal" data-target="#modal-nuevo-archivo"><i class="far fa-file-alt pr-2"></i>Nuevo archivo</a>
+			</li>
+				<% } %> <% } %>
+			<li>
+				<a href=""  onclick="obtenerCarpetasCompartidas(event, '<%=user.id%>')"><i class="fas fa-share-alt pr-2"></i>Carpetas compartidas</a>
+			</li>
+			<li>
+			    <a href=""  onclick="obtenerArchivosCompartidos(event, '<%=user.id%>')"><i class="fas fa-share-alt pr-2"></i>Archivos compartidos</a>
+			 </li>
+			 
+			 <li>
+				<a href="#"  data-toggle="modal" data-target="#modal-perfil"><i class="fas fa-user-circle pr-2"></i>Perfil</a>
+	 		</li>
+   			<!-- <li>
+   				<a href="#">Services</a>
+   			</li> -->
+   			<!-- <li>
+   				<a href="/usuarios/salir">salir</a>
+   			</li> -->
+   		</ul>
+   		
+   		<ul class="list-unstyled CTAs">
+   			<li>
+   				<a href="/usuarios/salir" class="article" >SALIR</a>
+   			</li>
+   			<li>
+   				<a href="#"  data-toggle="modal" data-target="#modal-plan-premiun"  class="article">Plan premiun</a>
+   			</li>
+   		</ul>
+		 </nav>
+
+		 <!-- modal para perfil -->
+		 <div class="modal fade" id="modal-perfil" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="">Perfil</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body bg-dark-olive">
+						<form action="" id="formularioCarpetas">
+							<div class="form-group col-12">
+									<label>Nombre: </label>
+									<label><%=user.nombre%></label>									
+							</div>
+							<div class="form-group col-12">
+								<label>Apellido: </label>
+								<label><%=user.apellido%></label><br>
+							</div>
+							<div class="form-group col-12">
+									<label>Correo: </label>
+									<label><%=user.correo%></label><br>
+							</div>
+							<div class="form-group col-12">
+									<label>Plan: </label>
+									<label><%=user.tipoUsuario%></label><br>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+						<!-- <button id="btn-crear-carpeta"type="button" class="btn btn-outline-success">Nueva Carpeta</button> -->
+					</div>
+				</div>
+			</div>
+		</div> 
+		 <!-- fin modal perfil -->
+
+		  <div class="modal fade" id="modal-nueva-carpeta" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="">Nueva Carpeta</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body bg-dark-olive">
+							<form action="" id="formularioCarpetas">
+								<div class="form-group col-12 sr-only">
+										<label>id del padre</label><br>			  	
+										<input class="form-control" type="txt" name="idPadre" value="<%if(typeof idPadre!=='undefined'){%><%=idPadre%><%}%>" id="txt-new-folder"><br>										
+								</div>
+								<div class="form-group col-12">
+									<label>Nombre</label><br>
+										<input class="form-control" type="txt" name="nombre" value="" id="txt-new-folder"><br>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+							<button id="btn-crear-carpeta"type="button" class="btn btn-outline-success">Nueva Carpeta</button>
+						</div>
+					</div>
+				</div>
+			</div> 
+		 
+		 <!-- modal para agregar carpetas -->
+		 <!-- <% if (typeof carpetas !== 'undefined') {%> -->
+		 <div class="modal fade" id="modal-nueva-carpeta" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="">Nueva Carpeta</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body bg-dark-olive">
+							<form action="" id="formularioCarpetas">
+								<div class="form-group col-12 sr-only">
+										<label>id del padre</label><br>			  	
+										<input class="form-control" type="txt" name="idPadre" value="<%if(typeof idPadre!=='undefined'){%><%=idPadre%><%}%>" id="txt-new-folder"><br>										
+								</div>
+								<div class="form-group col-12">
+									<label>Nombre</label><br>
+										<input class="form-control" type="txt" name="nombre" value="" id="txt-new-folder"><br>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+							<button id="btn-crear-carpeta"type="button" class="btn btn-outline-success">Nueva Carpeta</button>
+						</div>
+					</div>
+				</div>
+			</div> 
+			<!-- <%}%> -->
+			<!-- modal para agregar proyectos -->
+			
+			<div class="modal fade" id="modal-nuevo-proyecto" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="">Nuevo proyecto</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body bg-dark-olive">
+							<form id="formularioProyectos">
+								<div class="form-group col-12">
+									<label>Nombre</label><br>
+										<input class="form-control" type="txt" name="nombre" value="" ><br>
+								</div>
+								<div class="form-group col-12">
+									<label>Descripción del proyecto</label><br>
+										<input class="form-control" type="txt" name="descripcion" value="" ><br>
+								</div>
+								
+					  	</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+							<button id="btn-crear-proyecto"type="button" class="btn btn-outline-success">Nuevo proyecto</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+			<!-- modal para agregar archivos -->
+			<div class="modal fade" id="modal-nuevo-archivo" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="">Nuevo archivo</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body bg-dark-olive">
+								<form action="" id="formularioArchivos" class="col-12">
+									<div class="form-group sr-only">
+											<label>id del padre</label><br>			  	
+											<input class="form-control" type="txt" name="idPadre" value="<%if(typeof idPadre!=='undefined'){%><%=idPadre%><%}%>" id="txt-new-folder"><br>										
+									</div>
+									<div class="form-group">
+										<label>Nombre del archivo</label><br>
+										<input class="form-control" type="txt" name="nombre" value="" id="txt-new-folder"><br>
+									</div>
+									<select class="custom-select mb-4" id="lista-extensiones">
+											<option selected>Guardar como tipo</option>
+											<option value="1">.html</option>
+											<option value="2">.css</option>
+											<option value="3">.js</option>
+											<option value="3">.txt</option>
+											<option value="3">.php</option>
+											<option value="3">.js</option>
+											<option value="3">.ejs</option>
+											<option value="3">.json</option>
+											<option value="3">.java</option>
+											<option value="3">.class</option>
+											<option value="3">.cpp</option>
+											<option value="3">.exe</option>
+									</select>
+									<div class="form-group">
+											<label>contenido</label><br>
+											<textarea name="contenido" id=""  rows="15" style="width:100%;"></textarea>
+												<!-- <input class="form-control" type="txt" name="contenido" value="" id="txt-new-folder"><br> -->
+										</div>
+								</form>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+								<button id="btn-crear-archivo"type="button" class="btn btn-outline-success">Nuevo archivo</button>
+							</div>
+						</div>
+					</div>
+				</div> 
+				<!-- fin modal agregar archivos -->
+
+				<!-- inicio modal editar archivos -->
+				<div class="modal fade" id="modal-editar-archivos" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="nombreArchivo"></h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body bg-dark-olive">
+								<form action="" id="formularioEditarArchivos">
+									<div class="form-group col-12 sr-only">
+											<label>id del archivo</label><br>			  	
+											<input class="form-control" type="txt" name="idArchivo" value="" id="idArchivo"><br>										
+									</div>
+									<div class="form-group col-12">
+											<label>contenido</label><br>
+											<textarea name="contenidoArchivo" id="contenido-archivo"  rows="15" style="width:100%;"></textarea>
+												<!-- <input class="form-control" type="txt" name="contenido" value="" id="txt-new-folder"><br> -->
+										</div>
+								</form>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+								<button id="btn-editar-archivo"type="button" class="btn btn-outline-success">Guardar</button>
+							</div>
+						</div>
+					</div>
+				</div> 
+				<!-- fin modal editar archivo -->
+
+				<!-- modal para compartir carpetas -->
+				<div class="modal fade" id="modal-compartir-carpetas" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="">compartir carpeta</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body bg-dark-olive">
+								Elige el correo para compartir
+								<form  id="formulario-compartir-carpetas">
+										<div class="form-group sr-only">
+												<label class="sr-only">id de la carpeta</label><br>			  	
+												<input class="form-control" type="txt" name="idCarpeta"  id="carpetaCompartir"><br>										
+										</div>
+										<select class="custom-select" multiple size="12" id="lista-usuarios">
+											
+										</select>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+											<button id="btn-compartir-carpeta" type="button" class="btn btn-outline-success">Compartir Carpeta</button>
+										</div>
+								</form>
+							</div>
+						</div>
+				</div>  
+				<!-- fin modal compartir carpetas -->
+
+				<!-- inicio modal compartir archivos -->
+				<div class="modal fade" id="modal-compartir-archivos" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="">compartir archivo</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body bg-dark-olive">
+							Elige el correo para compartir
+							<form  id="formulario-compartir-archivos">
+									<div class="form-group sr-only">
+											<label class="sr-only">id del archivo</label><br>			  	
+											<input class="form-control" type="txt" name="idArchivo"  id="archivoCompartir"><br>										
+									</div>
+									<select class="custom-select" multiple size="12" id="lista-usuarios-archivos">
+										
+									</select>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+										<button id="btn-compartir-archivo" type="button" class="btn btn-outline-success">compartir archivo</button>
+									</div>
+							</form>
+						</div>
+					</div>
+			</div> 
+				<!-- fin modal compartir archivos -->
+
+   	<div class="content">
+   		 <nav class="navbar navbar-expand-lg "> <!--navbar-light bg-light -->
+   		
+									<button type="button" id="sidebarCollapse" class="btn btn-info">
+										<i class="fa fa-align-justify"></i> <span>Barra lateral</span>
+									</button>
+									
+							<!--<a class="navbar-brand" href="#">Navbar</a> -->
+							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+								<span class="navbar-toggler-icon"></span>
+							</button>
+							<div class="collapse navbar-collapse" id="navbarNav">
+								<ul class="navbar-nav ml-auto">
+									<li class="nav-item active">
+										<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+									</li>
+									<!-- <li class="nav-item">
+										<a class="nav-link" href="#">Features</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="#">Pricing</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link disabled" href="#">Disabled</a>
+									</li> -->
+								</ul>
+							</div>
+						</nav>
+		
+						<!-- modal plan premiun -->
+						
+			<div class="modal fade" id="modal-plan-premiun" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="">Adquirir plan premiun</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body bg-dark-olive">
+							<div class="text-center"><i class="fab fa-cc-visa fa-5x mb-4"></i> <i class="fab fa-cc-mastercard fa-5x mb-4 ml-3"> <i class="fab fa-cc-paypal"></i></i></div>
+							<form id="formularioProyectos">
+								<div class="form-group col-12">
+									<label>Número de la tarjeta</label><br>
+										<input class="form-control" type="txt" name="nombre" value="" placeholder="00001111000011110000" ><br>
+								</div>
+								<div class="form-row col-12">
+									<div class="form-group col-6" style="margin-top: 25px;">
+										<label class="" for="inputEmail4">Fecha expiración tarjeta</label>
+										<input type="text" class="form-control" name="nombre" id="inputEmail4" placeholder="03/04/2019"> 
+									</div>
+									<div class="form-group col-6" style="margin-top: 25px;">
+										<label class="" for="inputPassword4">Codigo de seguridad</label>
+										<input type="text" class="form-control" name="apellido" id="inputPassword4" placeholder="123">
+									</div>
+								</div>
+					  	</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+							<button id="btn-adquirir-plan" type="button" class="btn btn-outline-success">Comprar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- fin modal plan premiun -->
+
+
+     <div class="container-fluid">  
+			<div class="row" id="contenedorPrincipal">
+					<% include partials/errors%>
+					<% include partials/mensajes%>
+
+
+					<% if (typeof proyectos !== 'undefined') {%>
+						<%for (var i=0; i < proyectos.length; i++) { %>
+							<div class="col-sm-6 mb-4" id="<%=proyectos[i]._id%>">
+									<div class="card" style="background:#485e63; color: aliceblue;">
+									<div class="card-body">
+										<h5 class="card-title"><%=proyectos[i].nombre%></h5>
+										<p class="card-text"><%= proyectos[i].descripcion%></p>
+										<a href="/carpetas/<%=proyectos[i]._id%>" class="btn btn-primary">ver archivos</a>
+										<a href="/usuarios/editor/<%=proyectos[i]._id%>" class="btn btn-primary">comenzar proyecto</a> 
+										<a href="" style="float:right;" onclick="eliminarProyecto(event, '<%=proyectos[i]._id%>')"><i class="fas fa-trash fa-lg" style="color:#BF2B2B;"></i></a>
+									</div>
+									</div>
+							</div>
+						<% } %>
+					<% } %>
+					
+					<% if (typeof carpetas !== 'undefined') {%>
+						<%for (var i=0; i < carpetas.length; i++) { %>
+							<div class="col-xl-3 col-sm-12 col-xs-12 text-center mb-5" id="<%=carpetas[i]._id%>" >
+								<a href="/carpetas/<%= carpetas[i]._id %>"><i class="fas fa-folder fa-5x" style="color:#E18E48";></i></a>
+								<div>
+									<a href=""	onclick="eliminarCarpeta(event, '<%=carpetas[i]._id%>')"><i class="far fa-trash-alt fa-lg" style="color:#BF2B2B;"></i></a>
+									<a href="" onclick="modalCompartirCarpeta(event, '<%=carpetas[i]._id%>')"><i class="fas fa-share-alt fa-lg" style="color:#3334BF;"></i></a> 
+								</div>
+								<h4><%= carpetas[i].nombre%></h4>
+						</div>			
+						<% } %> 
+					<% } %> 
+					
+
+					<% if (typeof carpetasCom !== 'undefined') {%>
+						<%for (var i=0; i < carpetasCom.length; i++) { %>
+							<div class="col-xl-3 col-sm-12 col-xs-12 text-center mb-5" id="<%=carpetasCom[i]._id%>" >
+								<a href="/carpetasCom/<%= carpetasCom[i]._id %>"><i class="fas fa-folder fa-5x" style="color:#E18E48";></i></a>
+								<h4><%= carpetasCom[i].nombre%></h4>
+						</div>			
+						<% } %> 
+					<% } %> 
+
+					<% if (typeof archivos !== 'undefined') {%>
+						<%for (var i=0; i < archivos.length; i++) { %>
+						<div class="col-xl-3 col-sm-12 col-xs-12 text-center mb-5" id="<%=archivos[i]._id%>" >
+								<a href="#" onclick="modalEditarArchivos(event, '<%=archivos[i]._id%>')" ><i class="fas fa-file-code fa-5x mb-2" style="color:#77bbb8";></i></a>
+								<div>
+										<% if (archivos[i].nombre !== 'index' && archivos[i].nombre !== 'estilos'  && archivos[i].nombre !== 'controlador') {%>
+											<a href="" onclick="eliminarArchivo(event, '<%=archivos[i]._id%>')"><i class="far fa-trash-alt fa-lg" style="color:#BF2B2B;"></i></a> 
+										<% } %>
+										<a href="" onclick="modalCompartirArchivo(event, '<%=archivos[i]._id%>')"><i class="fas fa-share-alt fa-lg" style="color:#3334BF;"></i></a>               
+								
+								</div>
+								<h4><%=archivos[i].nombre%><%=archivos[i].extension%></h4>
+						</div>
+						<% } %> 
+					<% } %> 
+					
+				
+					
+			</div>
+		</div>
+  	
+  	
+  	
+  	
+   	</div>
+   	
+   	
+   	
+   	
+   	
+	 </div>
+	 
+	 
+    
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+		<script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+		<script src="/js/controladorPrincipal.js"></script>
+    <script>
+	    $(document).ready(function(){
+			$('#sidebarCollapse').on('click',function(){
+				$('#sidebar').toggleClass('active');
+			});
+		});  
+	</script>
+    
+    
+    
+    
+    
+  </body>
+</html>
+
+
+
+	

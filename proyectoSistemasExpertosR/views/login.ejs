@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+	  <meta charset="utf-8" />
+	  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	  <title>Page Title</title>
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <link rel="stylesheet" type="text/css" media="screen" href="/css/bootstrap.min.css" />
+	  <link rel="stylesheet" type="text/css" media="screen" href="/css/custom.css" />
+	  <link href="/css/landing.min.css" rel="stylesheet">
+</head>
+<body>
+	  <!-- Navigation -->
+	  <nav class="navbar navbar-expand-lg navbar-dark  navbar-shrink" id="mainNav">
+		<div class="container">
+		  <a class="navbar-brand js-scroll-trigger" href="/"><img src="/img/logosmall.png" alt=""></a>
+		  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+			Menu
+			<i class="fas fa-bars"></i>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarResponsive">
+			<ul class="navbar-nav text-uppercase ml-auto">
+			  <!-- <li class="nav-item">
+				<a class="nav-link js-scroll-trigger" href="#services">Servicios</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link js-scroll-trigger" href="#about">Plan premium</a>
+			  </li> -->
+			  <li class="nav-item">
+				<a class="nav-link js-scroll-trigger" href="#team">Entrar</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link js-scroll-trigger" href="/registrarse">Registrarse</a>
+			  </li>
+			</ul>
+		  </div>
+		</div>
+	  </nav>
+	
+	<div class="container">
+
+			<% include partials/errors%>
+			<% include partials/mensajes%>
+		<div class="row">
+
+			<!-- <% if (typeof errores !== 'undefined') {%>
+				<%for(var i=0; i < errores.length; i++) {%>
+					<div class="alert alert-warning alert-dismissible fade show" role="alert">
+						<%=errores[i].texto%>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+				<%}%>
+			<%}%> -->
+
+			<div class="col-md-4 mx-auto d-block bg-light" style="border:1px solid #b69b68; margin-top:160px; padding-bottom:20px; ">
+					<form action="/usuarios/autenticar" method="POST" >
+			  			<div class="form-group">
+			   				 <label for="exampleDropdownFormEmail2" class="text-secondary">Correo electrónico</label>
+			    			<input type="email" class="form-control" name="correo" id="exampleDropdownFormEmail2" placeholder="email@ejemplo.com">
+			  			</div>
+			  			<div class="form-group">
+			    			<label for="exampleDropdownFormPassword2" class="text-secondary">Contraseña</label>
+			   				 <input type="password" class="form-control" name="password" id="exampleDropdownFormPassword2" placeholder="Contraseña">
+			  			</div>
+			  			<!-- <div class="form-check">
+			   				 <input type="checkbox" class="form-check-input" id="dropdownCheck2">
+			    			<label class="form-check-label text-secondary" for="dropdownCheck2">
+			     			 Remember me
+			    			</label>
+			  			</div> -->
+			 			 <button type="submit" class="btn btn-primary">autenticar</button>
+					</form>
+			</div>
+		</div>			
+	</div>
+
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+
+</body>
+</html>
